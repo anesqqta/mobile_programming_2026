@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         val tvThisIs = findViewById<TextView>(R.id.tvThisIs)
         val btnNextActivity = findViewById<Button>(R.id.btnNextActivity)
         val btnProfile = findViewById<Button>(R.id.btnProfile)
+        val btnProducts = findViewById<Button>(R.id.btnProducts)
 
         val getResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -54,7 +55,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
         btnProfile.setOnClickListener {
-            val intent = Intent(this, ProfiveActivity::class.java)
+            val intent = Intent(this, ProfileActivity::class.java)
+            getResult.launch(intent)
+        }
+
+        btnProducts.setOnClickListener {
+            val intent = Intent(this, ProductsActivity::class.java)
             getResult.launch(intent)
         }
     }
