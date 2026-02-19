@@ -32,7 +32,8 @@ class LifeCyclesActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.d("Lifecycle", "Метод onStart викликано")    }
+        Log.d("Lifecycle", "Метод onStart викликано")
+    }
 
     override fun onResume() {
         super.onResume()
