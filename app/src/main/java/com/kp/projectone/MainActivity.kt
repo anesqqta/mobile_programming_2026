@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         val btnNextActivity = findViewById<Button>(R.id.btnNextActivity)
         val btnProfile = findViewById<Button>(R.id.btnProfile)
         val btnProducts = findViewById<Button>(R.id.btnProducts)
+        val btnlifeCycles = findViewById<Button>(R.id.btnlifeCycles)
 
         val getResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -62,6 +63,11 @@ class MainActivity : AppCompatActivity() {
         btnProducts.setOnClickListener {
             val intent = Intent(this, ProductsActivity::class.java)
             getResult.launch(intent)
+        }
+
+        btnlifeCycles.setOnClickListener {
+            val intent = Intent(this, LifeCyclesActivity::class.java)
+            startActivity(intent)
         }
     }
 }
