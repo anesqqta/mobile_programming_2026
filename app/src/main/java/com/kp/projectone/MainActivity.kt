@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         val btnProfile = findViewById<Button>(R.id.btnProfile)
         val btnProducts = findViewById<Button>(R.id.btnProducts)
         val btnlifeCycles = findViewById<Button>(R.id.btnlifeCycles)
+        val btnColor = findViewById<Button>(R.id.btnColor)
 
         val getResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -62,16 +63,19 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ProfileActivity::class.java)
             getResult.launch(intent)
         }
-
         btnProducts.setOnClickListener {
             val intent = Intent(this, ProductsActivity::class.java)
             getResult.launch(intent)
         }
-
         btnlifeCycles.setOnClickListener {
             val intent = Intent(this, LifeCyclesActivity::class.java)
             startActivity(intent)
         }
+        btnColor.setOnClickListener {
+            val intent = Intent(this, ColorActivity::class.java)
+            startActivity(intent)
+        }
+
 
         onBackPressedDispatcher.addCallback(
             owner = this,
@@ -96,7 +100,6 @@ class MainActivity : AppCompatActivity() {
         } ?: run {
             Log.d("size", "size is null")
         }
-
         builder.setPositiveButton("Discard") { dialog, _ ->
             dialog.dismiss()
         }

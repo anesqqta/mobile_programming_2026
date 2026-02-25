@@ -47,7 +47,7 @@
         android:id="@+id/btnProfile"
         android:layout_width="130dp"
         android:layout_height="60dp"
-        android:text="profile"
+        android:text="Profile"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,6 +85,19 @@
         app:layout_constraintVertical_bias="0.178"
         tools:visibility="visible" />
 
+    <Button
+        android:id="@+id/btnColor"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:text="Color"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.178"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
