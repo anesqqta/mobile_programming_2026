@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 class ColorActivity : AppCompatActivity() {
 
     private lateinit var squares: List<TextView>
+    private var level = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,23 +60,80 @@ class ColorActivity : AppCompatActivity() {
         cell.setBackgroundColor(nextColor)
     }
     private fun checkWin() {
-        val firstColor = (squares[0].background as ColorDrawable).color
-
-        val allSame = squares.all {
-            (it.background as ColorDrawable).color == firstColor
+        val win = when(level) {
+            1 -> checkLevel1()
+            2 -> checkLevel2()
+            3 -> checkLevel3()
+            4 -> checkLevel4()
+            else -> false
         }
-        if (allSame) {
-            showRestartDialog()
+        if (win) {
+            showLevelDialog()
         }
     }
-    private fun showRestartDialog() {
+    private fun checkLevel1(): Boolean {
+        val firstColor = (squares[0].background as ColorDrawable).color
+        return squares.all {
+            (it.background as ColorDrawable).color == firstColor
+        }
+    }
+    private fun checkLevel2(): Boolean {
+        for (i in squares.indices) {
+            val column = i % 3
+            val color = (squares[i].background as ColorDrawable).color
+            when(column) {
+                0 -> if (color != Color.YELLOW) return false
+                1 -> if (color != Color.RED) return false
+                2 -> if (color != Color.GREEN) return false
+            }
+        }
+        return true
+    }
+    private fun checkLevel3(): Boolean {
+        for (row in 0 until 5) {
+            var redCount = 0
+            for (col in 0 until 3) {
+                val index = row * 3 + col
+                val color = (squares[index].background as ColorDrawable).color
+                if (color == Color.RED) {
+                    redCount++
+                }
+            }
+            if (redCount != 1) return false
+        }
+        return true
+    }
+    private fun checkLevel4(): Boolean {
+        for (i in squares.indices) {
+            val currentColor = (squares[i].background as ColorDrawable).color
+            if (i % 3 != 2) {
+                val rightColor = (squares[i + 1].background as ColorDrawable).color
+                if (currentColor == rightColor) return false
+            }
+            if (i < 12) {
+                val bottomColor = (squares[i + 3].background as ColorDrawable).color
+                if (currentColor == bottomColor) return false
+            }
+        }
+        return true
+    }
+    private fun showLevelDialog() {
         AlertDialog.Builder(this)
-            .setTitle("Перемога!")
-            .setMessage("Усі квадрати одного кольору.\nПочати гру спочатку?")
-            .setPositiveButton("Restart") { _, _ ->
+            .setTitle("Рівень $level пройдено!")
+            .setMessage("Що робимо далі?")
+            .setPositiveButton("Наступний рівень") { _, _ ->
+                if (level < 4) {
+                    level++
+                    restartGame()
+                }
+            }
+            .setNegativeButton("Спочатку") { _, _ ->
+                level = 1
                 restartGame()
             }
-            .setCancelable(false)
+            .setNeutralButton("Вийти") { _, _ ->
+                finish()
+            }
             .show()
     }
     private fun restartGame() {
